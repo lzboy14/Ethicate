@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+                <link rel="stylesheet" type="text/css" href="static/css/style.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+                <title>ethicate - tracker</title>
+                <link rel="icon" href="static/favicon.ico">
+            </head>  
+        <body id="tracker">
+        
+            <div class="row justify-content-center" class="header">
+                <div class="col-4">
+                    <h3>ethicate</h3>
+                </div>
+                <div class="col-4">
+                    <br><br>
+                    <a class="buttonLink" href="home">home</a>
+                </div>
+            </div>
+            <br>
+            <div class="progress">
+                <div id = "myBar1" class="progress-bar progress-bar-good" role="progressbar" aria-valuenow="40"
+                aria-valuemin="0" aria-valuemax="100" style="width:50%"></div>
+                <div id = "myBar2" class="progress-bar progress-bar-bad" role="progressbar" aria-valuenow="40"
+                aria-valuemin="0" aria-valuemax="100" style="width:50%"></div>
+            </div>
+            <br>
+            <div class="container mt-5">
+                <div class="row height d-flex justify-content-center align-items-center">
+                    <div class="col-md-8">
+                        <div class="search">
+                            <i class="fa fa-search"></i>
+                            <form method="post" action="{{url_for('listPage')}}">
+                                <input type="text" id="deed" name="deed" value="" class="form-control" placeholder="enter a deed">
+                                <button type="submit" value="Submit" class="btn btn-primary">submit</button>
+                            </form>
+                            <script>
+                                var width1 = 50;
+                                var width2 = 50;
+                                width1 = width1 + {{ width }};
+                                width2 = width2 - {{ width }};
+                                function move() {
+                                    if ({{ Good }} == 1) {
+                                        alert("That was a good action! Keep it up! ");
+                                    } else if ({{ Bad }} == 1) { 
+                                        alert("That was a bad action! Please make better choices next time. ");
+                                    } else {
+                                        alert("Sorry, but we could not detect if your action was positive or negative.");
+                                    }
+                                    var elem1 = document.getElementById("myBar1");
+                                    var elem2 = document.getElementById("myBar2");
+                                    elem1.style.width = width1 + '%';
+                                    elem2.style.width = width2 + '%';
+                                }
+                                window.onload = move();
+                            </script>
+                        </div>  
+                    </div> 
+                </div>
+            </div>
+            <br><br><br><br>
+        
+            <!--<div class="container" id="data">
+                <div class="row-justify-content-around">
+                <div class="col mb-4">-->
+            <table class="table-borderless mb-5" id="data">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 50%"></th>
+                        <th scope="col" style="width: 50%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <table class="table table-bordered mt-5 mb-5">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="width: 10%">#</th>
+                                        <th scope="col" style="width: 75%">Good</th>
+                                        <th scope="col" style="width: 15%">Points</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in Gooddeeds %}
+                                    <tr>
+                                        {% for deed in row %}
+                                        <td>{{deed}}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="table table-bordered mt-5 mb-5">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="width: 10%">#</th>
+                                        <th scope="col" style="width: 75%">Bad</th>
+                                        <th scope="col" style="width: 15%">Points</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in Baddeeds %}
+                                    <tr>
+                                        {% for deed in row %}
+                                        <td>{{deed}}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+             
+            <footer id="footer" class="bg-light">
+                <section class="d-flex">
+                </section>
+                <section>
+                    <div class="text-center mt-5">
+                        <div class="row mt-3">
+                            <div class="col"></div>
+                            <div class="col row-justify-content-around mx-auto mb-4 mt-4">
+                                <h6 class="text-uppercase mb-4">About</h6>
+                                <p>Created August 2022</p>
+                            </div>
+                            <div class="col row-justify-content-around mx-auto mb-4 mt-4">
+                                <h6 class="text-uppercase mb-4">Links</h6>
+                                <p><a href="https://github.com" class="text-reset">Github</a></p>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+                </section>
+            </footer>
+        </body>
+    </html>
