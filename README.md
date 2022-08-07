@@ -1,0 +1,2 @@
+# ethicate
+developing ethical mindsets
